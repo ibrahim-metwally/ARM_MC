@@ -10,6 +10,8 @@
 #ifndef CPU_H
 #define CPU_H
 
+#define ASM()                  __asm()
+
 #define ASM_NOP()              __asm("NOP")
 
 extern void CpuDriver_EnableGlobalInterrupt (void);
