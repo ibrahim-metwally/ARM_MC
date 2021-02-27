@@ -36,3 +36,8 @@ void CpuDriver_StopCriticalSection (void)    /*RESUME*/
 		/**/
 	}
 }
+
+void CpuDriver_EnablePrivilegedMode(void)
+{
+   SVC();
+}
