@@ -1,22 +1,35 @@
 #include "app_main.h"
+#include "IntCtrl.h"
+#include "CPU.h"
+#include "Std_Types.h"
+#include "BitOperations.h"
+#include "MCU.h"
+#include "Wdg.h"
+#include "Port.h"
+void Wdg_ToutCbk(void)
+{
+   /*Action*/
+}
 
-#include "../MCAL/CPU/CPU.h"
-#include "../Common/Std_Types.h"
-#include "../Common/BitOperations.h"
+volatile static Mcu_PllStatusType PllStatusType = MCU_PLL_UNLOCKED;
 
 int main(void)
 {
-	CpuDriver_DisableGlobalInterrupt ();
-	ASM_NOP();
-	CpuDriver_EnableGlobalInterrupt ();
+   //Wdg_Init(WdgConfigSet);
+   IntCtrl_init();
+   Mcu_Init(MCU_DRIVER_CFG);
+   Mcu_InitClock(MCU_CLOCK_CFG_SET_0);
 
-	CpuDriver_StartCriticalSection ();
-	ASM_NOP();
-	CpuDriver_StopCriticalSection ();
-
+   while (PllStatusType != MCU_PLL_LOCKED)
+   {
+     PllStatusType = Mcu_GetPllStatus();
+   }
+   Mcu_DistributePllClock();
+  // Wdg_SetTriggerCondition(500);
+   Port_Init(PortConfigSet);
 	while(1)
 	{
-
+    
 	}
 	return 0;
 }

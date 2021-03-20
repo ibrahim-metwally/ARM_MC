@@ -40,4 +40,6 @@ typedef signed long long int    sint64;       /* -9,223,372,036,854,775,808 to 9
 typedef float  floaf32;
 typedef double float64;
 
+typedef uint8 boolean;
+
 #endif
