@@ -27,21 +27,26 @@
  *  GLOBAL DATA
  *********************************************************************************************************************/
 /**/
-const Gpt_ChannelConfigType Gpt_ChannelConfiguration[] = 
+const Gpt_ChannelConfigType Gpt_ChannelConfiguration[GPT_MAX_CONFIG_CHANNEL] = 
 {
- /*Gpt_ChannelType,Gpt_ValueType,Gpt_ValueType,Gpt_ModeType,tfvoidCbkFunc*/
-  {}
+ {
+  GPT_CHANNEL_2                 /*Gpt_Channel  */
+  ,GPT_CHANNEL_1_TICK_FREQ      /*TickFrequency*/
+  ,GPT_CHANNEL_1_MAX_TICK       /*TickValueMax */
+  ,GPT_CH_MODE_ONESHOT          /*Gpt_Mode     */
+  ,&vidGptCh2Notify             /*CbkFunc      */
+  }
 };
 /**/
-Gpt_ChannelRamDataType Gpt_ChannelRamData[] = 
+Gpt_ChannelRamDataType Gpt_ChannelRamData[GPT_MAX_CONFIG_CHANNEL] = 
 {
-    /*Gpt_TimerStatusType,boolean*/
- {}
+ /*Gpt_TimerStatus   , NotifyStatus*/
+ {GPT_CH_NOT_STARTED , GPT_CH_NOTIFY_DISABLE}
 };
 /**/
-extern const Gpt_ConfigType Gpt_Configuration[] =
+extern const Gpt_ConfigType Gpt_Configuration[GPT_MAX_CONFIG_CHANNEL] =
 {
- /*Gpt_ChannelConfigType        , Gpt_ChannelRamDataType*/
+ /* Gpt_ChannelConfig            , Gpt_ChannelRamData */
  { &Gpt_ChannelConfiguration[0] , &Gpt_ChannelRamData[0] }
 };
 /*********************************************************************************************************************/
