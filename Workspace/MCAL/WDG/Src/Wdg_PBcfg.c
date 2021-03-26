@@ -36,8 +36,6 @@ const Wdg_ConfigType Wdg_Configuration =
   WDG_RESET_ENABLE,
   /*WdgInitialTimeout  */
   WDG_INIT_TIME_OUT,
-  /*WdgMaxTimeout      */
-  WDG_MAX_TIME_OUT 
 };
 
 /*********************************************************************************************************************/

@@ -34,7 +34,8 @@ extern const Wdg_ConfigType Wdg_Configuration;
 #define WDG_INTERRUPT_TYPE        WDG_STANDARAD_INT
 #define WDG_RESET_ENABLE          TRUE
 #define WDG_INIT_TIME_OUT         0xFFFFFFFF
-#define WDG_MAX_TIME_OUT          1500
+
+#define WDG_MAX_TIME_OUT          ((uint32)62500)/*ms*/
 
 /**********************************************************************************************************************
  *  GLOBAL DATA PROTOTYPES

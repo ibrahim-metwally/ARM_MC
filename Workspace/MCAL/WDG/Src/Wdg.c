@@ -120,12 +120,10 @@ void Wdg_SetTriggerCondition (uint16 timeout)
   {
     if(timeout <= WDG_MAX_TIME_OUT)
     {
-       /*PIOSC 16 MHZ ->>>> 62.5 nSec*/
-
-       /*1 Tick ->>>> 62.5 nSec*/
-       /*10 Ticks ->>>>> 625 nSec*/
-       /*x Ticks  ->>>> timeout(ms)* 1000000*/
-       TickValue = (uint32)((timeout * ((uint32)10000000)) / ((uint32)625));
+                        /*PIOSC 16 MHZ*/
+       /*1 Tick   ->>>> (1/16000000) 62500ps*/
+       /*x Ticks  ->>>> timeout(ms)       */
+       TickValue = (uint32)((timeout * ((uint32)1000000000)) / ((uint32)62500));
 
       /*************Watchdog Lock (WDTLOCK)*************/
       /*Unlock WDT Registers*/

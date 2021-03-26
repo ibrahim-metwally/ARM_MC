@@ -15,7 +15,7 @@ volatile static Mcu_PllStatusType PllStatusType = MCU_PLL_UNLOCKED;
 
 int main(void)
 {
-   //Wdg_Init(WdgConfigSet);
+   Wdg_Init(WdgConfigSet);
    IntCtrl_init();
    Mcu_Init(MCU_DRIVER_CFG);
    Mcu_InitClock(MCU_CLOCK_CFG_SET_0);
@@ -25,7 +25,7 @@ int main(void)
      PllStatusType = Mcu_GetPllStatus();
    }
    Mcu_DistributePllClock();
-  // Wdg_SetTriggerCondition(500);
+   Wdg_SetTriggerCondition(500);
    Port_Init(PortConfigSet);
 	while(1)
 	{

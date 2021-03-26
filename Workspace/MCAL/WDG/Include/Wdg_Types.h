@@ -38,7 +38,6 @@ typedef struct
   uint8 InterruptType;
   boolean ResetEnable;
   uint32 WdgInitialTimeout;
-  uint32 WdgMaxTimeout;
 }Wdg_ConfigType;
 
 /**********************************************************************************************************************
