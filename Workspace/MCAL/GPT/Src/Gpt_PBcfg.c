@@ -42,9 +42,7 @@ Gpt_ChannelRamDataType Gpt_ChannelRamData[GPT_MAX_CONFIG_CHANNEL] =
 {
  {
   GPT_CH_NOT_STARTED           /*Gpt_TimerStatus     */
-  ,FALSE                       /*TimerConcatenation  */
   ,GPTM_COUNT_UP               /*TimerCountDirection */
-  ,GPT_TIMER_EXTENSION         /*PrescalerType       */
   ,GPT_CH_NOTIFY_DISABLE       /*NotifyStatus        */
  }
 };

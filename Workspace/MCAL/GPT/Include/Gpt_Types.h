@@ -50,9 +50,7 @@ typedef struct
 typedef struct
 {
   Gpt_TimerStatusType GptTimerStatus;
-  boolean TimerConcatenation; 
   uint8 TimerCountDirection;
-  boolean PrescalerType;
   boolean NotifyStatus;
 }Gpt_ChannelRamDataType;
 /**/

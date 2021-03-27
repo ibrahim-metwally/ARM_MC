@@ -34,7 +34,7 @@
 /**/
 #define GPT_MAX_CONFIG_CHANNEL    1U
 /**/
-#define DEFAULT_CH_FREQ      16U
+#define GPT_CLOCK            16U   /*16MHZ*/
 /*GPT Channels*/
 #define GPT_CHANNEL_1        ((Gpt_ChannelType)0)
 #define GPT_CHANNEL_2        ((Gpt_ChannelType)1)

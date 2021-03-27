@@ -37,11 +37,20 @@ static Gpt_StatusType Gpt_Status = Gpt_NOT_INITIALIZED;
 /**********************************************************************************************************************
  *  LOCAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
-
+static inline uint8 Sqrt(uint8 Num);
 /**********************************************************************************************************************
  *  LOCAL FUNCTIONS
  *********************************************************************************************************************/
-
+static inline uint8 Sqrt(uint8 Num)
+{
+    uint8 Count = 0;
+    while((Num % 2) == 0)
+    {
+        Num = Num / 2;
+        Count++;
+    }
+    return Count;
+}
 /**********************************************************************************************************************
  *  GLOBAL FUNCTIONS
  *********************************************************************************************************************/
@@ -184,7 +193,7 @@ void Gpt_StartTimer ( Gpt_ChannelType Channel, Gpt_ValueType Value )
   Gpt_ModeType ChannelMode;
   Gpt_ValueType RegValue = 0;
 
-  if(Gpt_Status == Gpt_INITIALIZED)
+  if((Gpt_Status == Gpt_INITIALIZED) && (Value <= GptChannelTickValueMax))
   {
      GptChannelTickValueMax = Gpt_ChannelConfigPtr[Channel].GptChannelTickValueMax;
      GptGptChannelTickFrequency = Gpt_ChannelConfigPtr[Channel].GptGptChannelTickFrequency;
@@ -192,22 +201,11 @@ void Gpt_StartTimer ( Gpt_ChannelType Channel, Gpt_ValueType Value )
 
      BaseAddress = Gpt_RegBaseAddress[Channel];
  /*5. Load the start value into the GPTM Timer n Interval Load Register (GPTMTnILR)*/     
-    if((Gpt_ChannelRamDataPtr[Channel].GptTimerStatus != GPT_CH_RUNNING) &&
-            (Value <= GptChannelTickValueMax))
+    if(Gpt_ChannelRamDataPtr[Channel].GptTimerStatus != GPT_CH_RUNNING)
     {
-      if(Gpt_ChannelRamDataPtr[Channel].PrescalerType == GPT_TIMER_EXTENSION)
-      {
-        RegValue = (uint64)(Value << ((DEFAULT_CH_FREQ / GptGptChannelTickFrequency) -1 ));
-        GPT_WRITE_REG(GPTMTAILR_REG_ADDR(BaseAddress),(uint32)RegValue);            /*Timer A Load*/
-      }
-      else   /*GPT_NO_PRESCALER*/
-      {
-         /**/
-      }
-    }
-    else
-    {
-      /*DET Error*/
+        RegValue = (uint64)(Value << (Sqrt(GPT_CLOCK / GptGptChannelTickFrequency)));
+        GPT_WRITE_REG(GPTMTAILR_REG_ADDR(BaseAddress),(uint32)RegValue);     /*Timer A Load*/
+        GPT_WRITE_REG(GPTMTAPR_REG_ADDR(BaseAddress),(uint32)(Value >> 16)); /*GPTM Timer A Prescale*/
     }
  /*6. If interrupts are required,set GPTM Interrupt Mask Register (GPTMIMR)*/
     if(Gpt_ChannelRamDataPtr[Channel].NotifyStatus == TRUE)
@@ -240,14 +238,12 @@ void Gpt_StopTimer ( Gpt_ChannelType Channel )
 {
   uint32 BaseAddress = 0;
 
-  if(Gpt_Status == Gpt_INITIALIZED)
+  if((Gpt_Status == Gpt_INITIALIZED) &&
+      (Gpt_ChannelRamDataPtr[Channel].GptTimerStatus == GPT_CH_RUNNING))
   {
     BaseAddress = Gpt_RegBaseAddress[Channel];
-    if(Gpt_ChannelRamDataPtr[Channel].GptTimerStatus == GPT_CH_RUNNING)
-    {
-      GPT_WRITE_REG(GPTMCTL_REG_ADDR(BaseAddress),(uint32)(((uint32)0x00) << GPTM_TAEN_BIT_IDX));  
-      Gpt_ChannelRamDataPtr[Channel].GptTimerStatus = GPT_CH_STOPPED;
-    }
+    GPT_WRITE_REG(GPTMCTL_REG_ADDR(BaseAddress),(uint32)(((uint32)0x00) << GPTM_TAEN_BIT_IDX));  
+    Gpt_ChannelRamDataPtr[Channel].GptTimerStatus = GPT_CH_STOPPED;
   }
   else
   {
@@ -267,6 +263,19 @@ void Gpt_StopTimer ( Gpt_ChannelType Channel )
 *******************************************************************************/
 Gpt_ValueType Gpt_GetTimeElapsed ( Gpt_ChannelType Channel )
 {
+  uint32 BaseAddress = 0;
+  Gpt_ValueType RegValue = 0;
+  Gpt_ValueType GptGptChannelTickFrequency;
+
+  if(Gpt_Status == Gpt_INITIALIZED)
+  {
+    GptGptChannelTickFrequency = Gpt_ChannelConfigPtr[Channel].GptGptChannelTickFrequency;
+    BaseAddress = Gpt_RegBaseAddress[Channel];
+
+    RegValue = *((volatile uint32 *)GPTMTAV_REG_ADDR(BaseAddress));
+    RegValue = RegValue >> (Sqrt(GPT_CLOCK / GptGptChannelTickFrequency));
+  }
+  return RegValue;
 }
 /******************************************************************************
 * \Syntax          :  
@@ -281,6 +290,13 @@ Gpt_ValueType Gpt_GetTimeElapsed ( Gpt_ChannelType Channel )
 *******************************************************************************/
 Gpt_ValueType Gpt_GetTimeRemaining ( Gpt_ChannelType Channel )
 {
+  uint32 BaseAddress = 0;
+  Gpt_ValueType RegValue = 0;
+  Gpt_ValueType GptGptChannelTickFrequency;
+
+  if(Gpt_Status == Gpt_INITIALIZED)
+  {
+  }
 }
 /*********************************************************************************************************************/
 /*  END OF FILE:                                                                                                */
