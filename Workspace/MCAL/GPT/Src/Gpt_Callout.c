@@ -40,7 +40,7 @@
  *********************************************************************************************************************/
 void vidGptCh1Notify(void)   /*ToDo : To Be called from ISR*/
 {
-   /*ToDo: Application Function*/
+   /*To Do: Application Function*/
   Gpt_ChannelRamData[GPT_CHANNEL_1].GptTimerStatus = GPT_CH_EXPIRED;
 }
 /*********************************************************************************************************************/

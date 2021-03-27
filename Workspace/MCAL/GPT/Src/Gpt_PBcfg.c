@@ -30,11 +30,11 @@
 const Gpt_ChannelConfigType Gpt_ChannelConfiguration[GPT_MAX_CONFIG_CHANNEL] = 
 {
  {
-  GPT_CHANNEL_2                 /*Gpt_Channel  */
+  GPT_CHANNEL_1                 /*Gpt_Channel  */
   ,GPT_CHANNEL_1_TICK_FREQ      /*TickFrequency*/
   ,GPT_CHANNEL_1_MAX_TICK       /*TickValueMax */
   ,GPT_CH_MODE_ONESHOT          /*Gpt_Mode     */
-  ,&vidGptCh2Notify             /*CbkFunc      */
+  ,&vidGptCh1Notify             /*CbkFunc      */
   }
 };
 /**/
@@ -44,7 +44,7 @@ Gpt_ChannelRamDataType Gpt_ChannelRamData[GPT_MAX_CONFIG_CHANNEL] =
   GPT_CH_NOT_STARTED           /*Gpt_TimerStatus     */
   ,FALSE                       /*TimerConcatenation  */
   ,GPTM_COUNT_UP               /*TimerCountDirection */
-  ,GPT_NO_PRESCALER            /*PrescalerType       */
+  ,GPT_TIMER_EXTENSION         /*PrescalerType       */
   ,GPT_CH_NOTIFY_DISABLE       /*NotifyStatus        */
  }
 };
