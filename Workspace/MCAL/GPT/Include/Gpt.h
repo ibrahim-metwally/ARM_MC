@@ -44,7 +44,6 @@ extern void Gpt_StartTimer ( Gpt_ChannelType Channel, Gpt_ValueType Value );
 extern void Gpt_StopTimer ( Gpt_ChannelType Channel );
 extern Gpt_ValueType Gpt_GetTimeElapsed ( Gpt_ChannelType Channel );
 extern Gpt_ValueType Gpt_GetTimeRemaining ( Gpt_ChannelType Channel );
-extern Std_ReturnType Gpt_GetPredefTimerValue ( Gpt_PredefTimerType PredefTimer ,uint32* TimeValuePtr );
 #endif  /* FILE_NAME_H */
 
 /**********************************************************************************************************************

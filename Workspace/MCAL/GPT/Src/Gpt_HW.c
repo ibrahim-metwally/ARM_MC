@@ -26,18 +26,18 @@
  *********************************************************************************************************************/
 const uint32 Gpt_RegBaseAddress [] =
 {
- GPT_16_32_bit_Timer_0_Base                         /* GPT_CHANNEL_1  */
- ,GPT_16_32_bit_Timer_1_Base                        /* GPT_CHANNEL_2  */
- ,GPT_16_32_bit_Timer_2_Base                        /* GPT_CHANNEL_3  */
- ,GPT_16_32_bit_Timer_3_Base                        /* GPT_CHANNEL_4  */
- ,GPT_16_32_bit_Timer_4_Base                        /* GPT_CHANNEL_5  */
- ,GPT_16_32_bit_Timer_5_Base                        /* GPT_CHANNEL_6  */
- ,GPT_32_64_bit_Wide_Timer_0_Base                   /* GPT_CHANNEL_7  */
- ,GPT_32_64_bit_Wide_Timer_1_Base                   /* GPT_CHANNEL_8  */
- ,GPT_32_64_bit_Wide_Timer_2_Base                   /* GPT_CHANNEL_9  */
- ,GPT_32_64_bit_Wide_Timer_3_Base                   /* GPT_CHANNEL_10 */
- ,GPT_32_64_bit_Wide_Timer_4_Base                   /* GPT_CHANNEL_11 */
- ,GPT_32_64_bit_Wide_Timer_5_Base                   /* GPT_CHANNEL_12 */
+ GPT_CH_1_BASE_ADDR  
+ ,GPT_CH_2_BASE_ADDR 
+ ,GPT_CH_3_BASE_ADDR 
+ ,GPT_CH_4_BASE_ADDR 
+ ,GPT_CH_5_BASE_ADDR 
+ ,GPT_CH_6_BASE_ADDR 
+ ,GPT_CH_7_BASE_ADDR 
+ ,GPT_CH_8_BASE_ADDR 
+ ,GPT_CH_9_BASE_ADDR 
+ ,GPT_CH_10_BASE_ADDR
+ ,GPT_CH_11_BASE_ADDR
+ ,GPT_CH_12_BASE_ADDR
 };
 /**********************************************************************************************************************
  *  LOCAL FUNCTION PROTOTYPES

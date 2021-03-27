@@ -33,7 +33,7 @@ typedef uint8 Gpt_StatusType;
 typedef void (*tfvoidCbkFunc) (void);
 
 typedef uint8 Gpt_ChannelType    ;
-typedef uint32 Gpt_ValueType     ;
+typedef uint64 Gpt_ValueType     ;
 typedef uint8 Gpt_ModeType       ;
 typedef uint8 Gpt_PredefTimerType;
 typedef uint8 Gpt_TimerStatusType;
@@ -42,7 +42,7 @@ typedef struct
 {
   Gpt_ChannelType GptChannelId;
   uint8 GptGptChannelTickFrequency;
-  uint64 GptChannelTickValueMax;
+  Gpt_ValueType GptChannelTickValueMax;
   Gpt_ModeType ChannelMode;
   tfvoidCbkFunc GptNotification;
 }Gpt_ChannelConfigType;
@@ -50,6 +50,9 @@ typedef struct
 typedef struct
 {
   Gpt_TimerStatusType GptTimerStatus;
+  boolean TimerConcatenation; 
+  uint8 TimerCountDirection;
+  boolean PrescalerType;
   boolean NotifyStatus;
 }Gpt_ChannelRamDataType;
 /**/

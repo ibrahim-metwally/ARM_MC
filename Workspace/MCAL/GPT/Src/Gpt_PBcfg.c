@@ -40,14 +40,21 @@ const Gpt_ChannelConfigType Gpt_ChannelConfiguration[GPT_MAX_CONFIG_CHANNEL] =
 /**/
 Gpt_ChannelRamDataType Gpt_ChannelRamData[GPT_MAX_CONFIG_CHANNEL] = 
 {
- /*Gpt_TimerStatus   , NotifyStatus*/
- {GPT_CH_NOT_STARTED , GPT_CH_NOTIFY_DISABLE}
+ {
+  GPT_CH_NOT_STARTED           /*Gpt_TimerStatus     */
+  ,FALSE                       /*TimerConcatenation  */
+  ,GPTM_COUNT_UP               /*TimerCountDirection */
+  ,GPT_NO_PRESCALER            /*PrescalerType       */
+  ,GPT_CH_NOTIFY_DISABLE       /*NotifyStatus        */
+ }
 };
 /**/
 extern const Gpt_ConfigType Gpt_Configuration[GPT_MAX_CONFIG_CHANNEL] =
-{
- /* Gpt_ChannelConfig            , Gpt_ChannelRamData */
- { &Gpt_ChannelConfiguration[0] , &Gpt_ChannelRamData[0] }
+{   
+ {
+  &Gpt_ChannelConfiguration[0]     /*Gpt_ChannelConfig */
+  ,&Gpt_ChannelRamData[0]          /*Gpt_ChannelRamData*/
+ }
 };
 /*********************************************************************************************************************/
 /*  END OF FILE:                                                                                              */

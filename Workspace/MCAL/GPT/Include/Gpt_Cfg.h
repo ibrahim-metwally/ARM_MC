@@ -33,6 +33,8 @@
  *********************************************************************************************************************/
 /**/
 #define GPT_MAX_CONFIG_CHANNEL    1U
+/**/
+#define DEFAULT_CH_FREQ      16U
 /*GPT Channels*/
 #define GPT_CHANNEL_1        ((Gpt_ChannelType)0)
 #define GPT_CHANNEL_2        ((Gpt_ChannelType)1)
@@ -83,6 +85,10 @@
 /*GPT Notification Status*/
 #define GPT_CH_NOTIFY_DISABLE    0U
 #define GPT_CH_NOTIFY_ENABLE     1U
+/*Prescaler Types*/
+#define GPT_TRUE_PRESCALER     0U
+#define GPT_TIMER_EXTENSION    1U
+#define GPT_NO_PRESCALER       2U
 /**/
 extern const Gpt_ChannelConfigType Gpt_ChannelConfiguration[GPT_MAX_CONFIG_CHANNEL];
 /**/
