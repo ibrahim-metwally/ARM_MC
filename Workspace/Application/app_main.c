@@ -6,6 +6,9 @@
 #include "MCU.h"
 #include "Wdg.h"
 #include "Port.h"
+#include "Gpt.h"
+
+
 void Wdg_ToutCbk(void)
 {
    /*Action*/
@@ -19,13 +22,12 @@ int main(void)
    IntCtrl_init();
    Mcu_Init(MCU_DRIVER_CFG);
    Mcu_InitClock(MCU_CLOCK_CFG_SET_0);
-
+   Gpt_Init(GptConfigSet);
    while (PllStatusType != MCU_PLL_LOCKED)
    {
      PllStatusType = Mcu_GetPllStatus();
    }
    Mcu_DistributePllClock();
-   Wdg_SetTriggerCondition(500);
    Port_Init(PortConfigSet);
 	while(1)
 	{
